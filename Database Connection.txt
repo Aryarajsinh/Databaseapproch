@@ -1,0 +1,34 @@
+*Code First Approch
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  public class StudentDbContext : DbContext
+  {
+      public StudentDbContext(DbContextOptions options):base(options) 
+      {
+          
+      }
+      public DbSet<Student> Students { get; set; }
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ var provider = builder.Services.BuildServiceProvider();
+ var config = provider.GetRequiredService<IConfiguration>();
+ builder.Services.AddDbContext<StudentDbContext>(item => item.UseSqlServer(config.GetConnectionString("dbcs")));
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ packge manager => add-migration init
+                => update-database
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ "ConnectionStrings": {
+   "dbcs": "Server=192.168.1.117;Database=Aryarajsinh;User Id=sa;password=sit@123;TrustServerCertificate=True"
+  },
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*Database First Approch
+
+   => Add Three Package :  i)Microsoft.EntityFrameworkCore.SqlServer
+                          ii)Microsoft.EntityFrameworkCore.Design
+                          iii)Microsoft.EntityFrameworkCore.Tools
+
+  => Scaffold-DbContext "Server=192.168.1.117;Database=Aryarajsinh;User Id=sa;Password=sit@123;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+  => Use After Update Table :
+        Scaffold-DbContext "Server=192.168.1.117;Database=Aryarajsinh;User Id=sa;Password=sit@123;TrustServerCertificate=True"
+              Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models-force
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
