@@ -31,4 +31,13 @@
   => Use After Update Table :
         Scaffold-DbContext "Server=192.168.1.117;Database=Aryarajsinh;User Id=sa;Password=sit@123;TrustServerCertificate=True"
               Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models-force
+
+=>Add Program.cs File :
+    var provider = builder.Services.BuildServiceProvider();
+    var config = provider.GetRequiredService<IConfiguration>();
+    builder.Services.AddDbContext<StudentDbContext>(item => item.UseSqlServer(config.GetConnectionString("dbcs")));
+
+=>And Last add ConnectionString :  "ConnectionStrings": {
+   "dbcs": "Server=192.168.1.117;Database=Aryarajsinh;User Id=sa;password=sit@123;TrustServerCertificate=True"
+  }
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
